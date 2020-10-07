@@ -708,6 +708,13 @@ $(function () {
     
 	
 	<script src="/js/cursor.js"></script>
+	<script type="text/javascript">
+    var OriginTitile=document.title,st;
+	document.addEventListener("visibilitychange",function(){
+        document.hidden?(document.title="(*ෆ´ ˘ `ෆ*)♡喜欢我吗",clearTimeout(st)):(document.title="ฅ( ̳• ◡ • ̳)ฅ嗯嗯",st=setTimeout(function(){document.title=OriginTitile},3e3))
+    })
+	</script>
+
 
 
 </body>
