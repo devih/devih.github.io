@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Dog">
+    <meta name="keywords" content="sqli-lab-1, Dog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Dog</title>
+    <title>sqli-lab-1 | Dog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">sqli-lab-1</h1>
                 </div>
             </div>
         </div>
@@ -445,14 +445,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-06
+                    2020-10-07
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2020-10-06
+                    2020-10-07
                 </div>
                 
 
@@ -466,15 +466,32 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <p><strong>Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</strong></p>
+<pre><code> SQL注入即是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</code></pre>
+<p><strong>知识点</strong>：1，判断是数字型还是字符型，单引号还是双引号<br>                    2，union select联合查询注入<br>                    3，payload原理与防御措施</p>
+<p><strong>0X0a</strong><br>    判断注入点及类型<br>    这道题因为是sqli-lab的靶场，所以知道是get型的单引号注入，直接在url栏就可以尝试<br>    通常情况下，加个单引号，使id这个参数不能闭合，通过分析返回的报错信息，来进一步判断<br>    <img src="https://img-blog.csdnimg.cn/20201007212113129.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>    <strong>单引号判断‘ 显示数据库错误信息或者页面回显不同(整形,字符串类型判断)</strong><br>    可以看到，单引号没有闭合，返回了报错信息，显示的就是单引号<br>    兄弟萌也可以直接打开源码，通过一步步的比较，进一步学习<br><img src="https://img-blog.csdnimg.cn/20201007212337363.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br> sql语句如上图，id这个参数周围是单引号<br> <strong>and 1=1 / and 1=2 回显页面不同(整形判断)</strong><br>    <img src="https://img-blog.csdnimg.cn/20201007213333240.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201007213338366.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>在数据库中 1=1 和1=2  后面随便输入字符串（相当于1=1和1=2后面的查询语句），发现select 1=”1dasd”时返回1正确，1=”2dasd”时返回0错误，即select在查询时忽略后面的字符串，只让1和后面第一个数字对比，如果相等就是正确，不相等返回错误。</p>
+<p><strong>0x0b</strong><br>        <strong>union select联合查询注入</strong><br>                1，**<em>判断列数**</em><br>        order by 函数是对MySQL中查询结果按照指定字段名进行排序，除了指定字 段名还可以指定字段的栏位进行排序，第一个查询字段为1，第二个为2，依次 类推。我们可以通过二分法来猜解列数</p>
+<pre><code>    输入order by 4 --+,页面回显错误，说明不存在第四列</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/20201007213916680.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>如此实验2和3，发现3成功，故列数为3</p>
+<p>2，**<em>判断页面回显的列数**</em></p>
+<p><img src="https://img-blog.csdnimg.cn/20201007214147271.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">回显发现2，3列会被显示</p>
+<p>为什么这里得用-1？？为什么2，3被显示了</p>
+<p>因为，程序在展示数据的时候通常只会取结果集的第一行数据，看一下源码，mysql_fetch_array只被调用了一次，而mysql_fetch_array从结果集中取得一行作为关联数组或数字数组或二者兼有，具体看第二个参数是什么。所以这里无论怎么折腾最后只会出来第一行的查询结果。只要让第一行查询的结果是空集，即union左边的select子句查询结果为空，那么union右边的查询结果自然就成为了第一行，打印在网页上了。将id改成-1，使union前面的语句报错，执行后面的，爆出显示位2，3</p>
+<p><strong><em>3，查库名，得表名，爆列名，获字段</em></strong></p>
+<p>group_concat([DISTINCT] 要连接的字段 [Order BY ASC/DESC 排序字段] [Separator ‘分隔符’])<br>说明：通过使用distinct可以排除重复值；如果希望对结果中的值进行排序，可以使用order by子句；separator是一个字符串值，缺省为一个逗号。(具体有点多，请自查，我也不是很懂。。。)</p>
+<p>SCHEMATA表：储存mysql所有数据库的基本信息，包括数据库名，编码类型路径等，show databases的结果取之此表。</p>
+<p>TABLES表：储存mysql中的表信息，（当然也有数据库名这一列，这样才能找到哪个数据库有哪些表嘛）包括这个表是基本表还是系统表，数据库的引擎是什么，表有多少行，创建时间，最后更新时间等。show tables from schemaname的结果取之此表</p>
+<p>COLUMNS表：提供了表中的列信息，（当然也有数据库名和表名称这两列）详细表述了某张表的所有列以及每个列的信息，包括该列是那个表中的第几列，列的数据类型，列的编码类型，列的权限，猎德注释等。是show columns from schemaname.tablename的结果取之此表。</p>
+<p><img src="https://img-blog.csdnimg.cn/20201007215104868.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201007215435736.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201007215640830.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201007215442890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>/<em>注意，查询information_schema中的信息时，使用where语句，那个值不能直接用英文，要用单引号包裹着，当然用其十六进制表示也可以，数值类型的就不用单引号了，这对过滤单引号应该有指导意义。</em>/     （这里并没有过滤，所以没用）</p>
+<p><strong>0x0c<br>        payload原理与防御措施</strong></p>
+<p><strong>1，</strong>为什么要单引号<br>            原理：加单引号是为了让后台SQL语句执行的时候报错，这样，我们就可以初步判断单引号被放在SQL语句中执行了，执行的语句因为有单引号而出错了，方便浑水摸鱼<br>            防御：1、  将单引号过滤或者替换 – 一般程序都是这样做的    2、将单引号转义 – 所谓转义就是让它成为一个普通的字符，而不具备执行功能，php常用addslashes()函数完成这一功能    3、 将服务器设置为不允许爆错或者爆404 not found</p>
+<p><strong>2，</strong>权限绕过<br>            有俗称的万能语句：SELECT * FROM users WHERE name = ‘’ OR ‘1’=’1’;<br>            即1=1永远为真<br>            如果这些SQL查询放在权限验证的代码中，那么该代码就会爆权限绕过了。<br><strong>3，</strong>多语句执行<br>            最常用的就是union select联合查询注入<br>            UNION 操作符用于合并两个或多个 SELECT 语句的结果集。 请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。<br>            比如，SELECT * FROM userinfo WHERE id=1;<strong>DROP TABLE users;</strong><br>            删库跑路。。。</p>
+<p>sql注入的防御与绕过还不是很懂，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/milantgh/p/4394467.html">大佬链接</a></p>
+<p>继续努力。。。</p>
+<p>2020.10.7   公瑾</p>
 
             </div>
             <hr/>
@@ -490,7 +507,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">devih</a>
+                    <a href="/about" rel="external nofollow noreferrer">gongjin</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -500,7 +517,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://devih.github.io/2020/10/06/hello-world/">https://devih.github.io/2020/10/06/hello-world/</a>
+                    <a href="https://devih.github.io/2020/10/07/sqli-lab-1/">https://devih.github.io/2020/10/07/sqli-lab-1/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -513,7 +530,7 @@
                     本博客所有文章除特別声明外，均采用
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     许可协议。转载请注明来源
-                    <a href="/about" target="_blank">devih</a>
+                    <a href="/about" target="_blank">gongjin</a>
                     !
                 </span>
             </div>
@@ -577,9 +594,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2020/10/07/sqli-lab-1/">
                     <div class="card-image">
@@ -597,9 +615,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-07
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-07
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -608,6 +626,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -615,7 +634,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/10/06/hello-world/">
@@ -645,7 +664,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>
