@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="sqli-lab-1, Dog">
+    <meta name="keywords" content="sqli-lab(1~4详解), Dog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>sqli-lab-1 | Dog</title>
+    <title>sqli-lab(1~4详解) | Dog</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -308,12 +308,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/22.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">sqli-lab-1</h1>
+                    <h1 class="description center-align post-title">sqli-lab(1~4详解)</h1>
                 </div>
             </div>
         </div>
@@ -445,7 +445,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2020-10-07
+                    2020-10-09
                 </div>
                 
 
@@ -466,8 +466,7 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</strong></p>
-<pre><code> SQL注入即是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</code></pre>
+                <h2 id="Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入"><a href="#Less-1-GET-Error-based-Single-quotes-String-基于错误的GET单引号字符型注入" class="headerlink" title="Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)"></a><strong>Less-1 GET - Error based - Single quotes - String(基于错误的GET单引号字符型注入)</strong></h2><pre><code> SQL注入即是指web应用程序对用户输入数据的合法性没有判断或过滤不严，攻击者可以在web应用程序中事先定义好的查询语句的结尾上添加额外的SQL语句，在管理员不知情的情况下实现非法操作，以此来实现欺骗数据库服务器执行非授权的任意查询，从而进一步得到相应的数据信息。</code></pre>
 <p><strong>知识点</strong>：1，判断是数字型还是字符型，单引号还是双引号<br>                    2，union select联合查询注入<br>                    3，payload原理与防御措施</p>
 <h2 id="0X0a"><a href="#0X0a" class="headerlink" title="0X0a"></a><strong>0X0a</strong></h2><pre><code>判断注入点及类型
 这道题因为是sqli-lab的靶场，所以知道是get型的单引号注入，直接在url栏就可以尝试
@@ -502,8 +501,71 @@
 <h2 id="0x0c-payload原理与防御措施"><a href="#0x0c-payload原理与防御措施" class="headerlink" title="0x0c payload原理与防御措施"></a><strong>0x0c payload原理与防御措施</strong></h2><p><strong>1，</strong>为什么要单引号<br>            原理：加单引号是为了让后台SQL语句执行的时候报错，这样，我们就可以初步判断单引号被放在SQL语句中执行了，执行的语句因为有单引号而出错了，方便浑水摸鱼<br>            防御：1、  将单引号过滤或者替换 – 一般程序都是这样做的    2、将单引号转义 – 所谓转义就是让它成为一个普通的字符，而不具备执行功能，php常用addslashes()函数完成这一功能    3、 将服务器设置为不允许爆错或者爆404 not found</p>
 <p><strong>2，</strong>权限绕过<br>            有俗称的万能语句：SELECT * FROM users WHERE name = ‘’ OR ‘1’=’1’;<br>            即1=1永远为真<br>            如果这些SQL查询放在权限验证的代码中，那么该代码就会爆权限绕过了。<br><strong>3，</strong>多语句执行<br>            最常用的就是union select联合查询注入<br>            UNION 操作符用于合并两个或多个 SELECT 语句的结果集。 请注意，UNION 内部的 SELECT 语句必须拥有相同数量的列。列也必须拥有相似的数据类型。同时，每条 SELECT 语句中的列的顺序必须相同。<br>            比如，SELECT * FROM userinfo WHERE id=1;<strong>DROP TABLE users;</strong><br>            删库跑路。。。</p>
 <p>sql注入的防御与绕过还不是很懂，<a target="_blank" rel="noopener" href="https://www.cnblogs.com/milantgh/p/4394467.html">大佬链接</a></p>
-<p>继续努力(ง •̀_•́)ง</p>
-<p>2020.10.7   公瑾</p>
+<h2 id="Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入"><a href="#Less-2-GET-Error-based-Intiger-based-基于错误的GET整型注入" class="headerlink" title="Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)"></a><strong>Less-2 GET - Error based - Intiger based (基于错误的GET整型注入)</strong></h2><p>知识点：1，判断是数字型还是字符型，单引号还是双引号<br>2，union select联合查询注入<br>3，payload原理与防御措施</p>
+<p>**</p>
+<h2 id="0x0a"><a href="#0x0a" class="headerlink" title="0x0a"></a>0x0a</h2><p>**</p>
+<p>这道题与上道题的唯一区别就是这个是整型,即这个题的id参数没有引号，只是数字，这意味着在你绕过的时候可以不需要对后面的引号过滤（如果没有其他干扰的话）</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009112633611.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述">这里id=1，虽然回显没报错，但不能确定</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009112709519.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>单引号就报错了，有的时候也可能是双引号</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009112743715.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>这里后面没有过滤，却成功了，说明这个应该就是整型了</p>
+<p>通过阅读源码，也是很讷到的</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009112936707.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>id这个参数只是数字，没有一些过滤，所以确定是整型</p>
+<p>**</p>
+<h2 id="0x0b-1"><a href="#0x0b-1" class="headerlink" title="0x0b"></a>0x0b</h2><p>**</p>
+<p>union select联合查询注入也是一样，区别也是id后无单引号，原因就不再说了，前边有</p>
+<p>稍微演示前几步，知道具体区别</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009113409289.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/20201009113415152.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>很清楚的知道id=1，后面没有引号</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009113459371.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>通过这幅图与上一幅图比较，可以看见当整型数据无其他干扰时，注释符也可以省略，因为不需要注释掉后边的引号</p>
+<p>后面步骤一样，不再啰嗦</p>
+<p>**</p>
+<h2 id="0x0c"><a href="#0x0c" class="headerlink" title="0x0c"></a>0x0c</h2><p>**</p>
+<p>payload的原理与防御措施，还有前边省略的几步，都在我写的less-1中，有详细的说明</p>
+<p>这里也对前边做点补充</p>
+<p><strong>CONCAT（）函数</strong><br>CONCAT（）函数用于将多个字符串连接成一个字符串。<br>使用数据表Info作为示例，其中SELECT id,name FROM info LIMIT 1;的返回结果为<br>+—-+——–+<br>| id | name |<br>+—-+——–+<br>| 1 | BioCyc |<br>+—-+——–+<br>语法及使用特点：<br>CONCAT(str1,str2,…)<br>返回结果为连接参数产生的字符串。如有任何一个参数为NULL ，则返回值为 NULL。可以有一个或多个参数。</p>
+<p><strong>GROUP_CONCAT（）函数</strong><br>GROUP_CONCAT函数返回一个字符串结果，该结果由分组中的值连接组合而成。 </p>
+<p>使用语法及特点：<br>GROUP_CONCAT([DISTINCT] expr [,expr …]<br>[ORDER BY {unsigned_integer | col_name | formula} [ASC | DESC] [,col …]]<br>[SEPARATOR str_val])<br>在 MySQL 中，你可以得到表达式结合体的连结值。通过使用 DISTINCT 可以排除重复值。如果希望对结果中的值进行排序，可以使用 ORDER BY 子句。<br>SEPARATOR 是一个字符串值，它被用于插入到结果值中。缺省为一个逗号 (“,”)，可以通过指定 SEPARATOR “” 完全地移除这个分隔符。 </p>
+<p>通常情况下，这两个组合来用，对于sql注入，还是挺方便的</p>
+<p>ps：感觉自己会的都只是浅层表面的，内在也不懂，具体逻辑，原理说不太上来</p>
+<p>还请各位大佬评论区留言指教，非常感谢<del>(≥▽≤)/</del></p>
+<h2 id="Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入"><a href="#Less-3-GET-Error-based-Single-quotes-with-twist-string-基于错误的GET单引号变形字符型注入" class="headerlink" title="Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)"></a><strong>Less-3 GET - Error based - Single quotes with twist string (基于错误的GET单引号变形字符型注入)</strong></h2><p>知识点：1，单引号字符变形，如:(‘’)<br>              2，union select联合查询注入<br>              3，payload原理及防御</p>
+<p>**</p>
+<h2 id="0x0a-1"><a href="#0x0a-1" class="headerlink" title="0x0a"></a>0x0a</h2><p>**</p>
+<p>这几个都是类似的，单引号看一下</p>
+<p><img src="https://img-blog.csdnimg.cn/202010091240468.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>通过回显，看到有括号，推测输入的内容存放到一对单引号加圆括号中了，形如select … from … where id=(‘1’) …</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009124227339.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>看下源码，能更了解sql注入绕过</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009124310104.png#pic_center" alt="在这里插入图片描述"></p>
+<p>**</p>
+<h2 id="0x0b-2"><a href="#0x0b-2" class="headerlink" title="0x0b"></a>0x0b</h2><p>**</p>
+<p>这里与前文一样，也是看下区别就行，具体payload仿照less-1</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009125140384.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p><img src="https://img-blog.csdnimg.cn/20201009125144307.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>**</p>
+<h2 id="0x0c-1"><a href="#0x0c-1" class="headerlink" title="0x0c"></a>0x0c</h2><p>**</p>
+<p>这里与前面不一样的就是过滤id参数，（‘’）这种过滤，通过报错回显，可以进一步了解</p>
+<p>这时如果设置成不允许服务器爆错，他不就抓虾，得盲注了，盲注具体后边题详细说</p>
+<p>union select联合查询注入也是一样，拼接语句，多语句执行绕过</p>
+<p>这几篇一起学习，相似地方很多</p>
+<h2 id="Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）"><a href="#Less-4-GET-Error-based-Double-Quotes-String-（基于错误的GET双引号字符型注入）" class="headerlink" title="Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）"></a><strong>Less-4 GET - Error based - Double Quotes - String （基于错误的GET双引号字符型注入）</strong></h2><p>知识点：1，双引号字符型的判断</p>
+<p>**</p>
+<h2 id="0x0a-2"><a href="#0x0a-2" class="headerlink" title="0x0a"></a>0x0a</h2><p>**</p>
+<p>输入单引号，页面无任何变化，这时候就得考虑双引号了</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009130851271.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>输入双引号，页面报错</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009130935760.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>根据报错信息判断出输入的内容被放到一对双引号和圆括号中</p>
+<p>打开源码，一探究竟</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009131014112.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>第一行将输入的id值再加一对双引号</p>
+<p>第二行将id又加了一对括号</p>
+<p>两次没有放在一块，代码审计得认真</p>
+<p>不过也可以理解为select … from … where id=(”1”) …，这样其实一样</p>
+<p>验证看一下</p>
+<p><img src="https://img-blog.csdnimg.cn/20201009131336340.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
+<p>**</p>
+<h2 id="1-4总结"><a href="#1-4总结" class="headerlink" title="1-4总结"></a>1-4总结</h2><p>**</p>
+<p>都是基于错误的GET型一次注入，区别只是字符型或整型，单引号还是双引号，有无括号变形</p>
+<p>payload原理和防御措施也是一样，写在前边了，详情见<strong>less-1末尾</strong>与<strong>less-2末尾</strong></p>
+<p>这几个题放一块，方便学习与理解，参照源码，互相比对</p>
+<p>理解错误之处还望不吝赐教,感谢大佬／人◕ ‿‿ ◕人＼</p>
+<p>2020.10.9   公瑾</p>
 
             </div>
             <hr/>
@@ -529,7 +591,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://devih.github.io/2020/10/07/sqli-lab-1/">https://devih.github.io/2020/10/07/sqli-lab-1/</a>
+                    <a href="https://devih.github.io/2020/10/09/sqli-lab(1-4%E8%AF%A6%E8%A7%A3)/">https://devih.github.io/2020/10/09/sqli-lab(1-4%E8%AF%A6%E8%A7%A3)/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -606,17 +668,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2020/10/09/sqli-lab-2/">
+                <a href="/2020/10/09/sqli-lab(1-4%E8%AF%A6%E8%A7%A3)/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="sqli-lab-2">
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="sqli-lab(1~4详解)">
                         
-                        <span class="card-title">sqli-lab-2</span>
+                        <span class="card-title">sqli-lab(1~4详解)</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -626,9 +689,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-10-09
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -637,6 +700,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
