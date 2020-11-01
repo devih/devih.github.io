@@ -477,7 +477,7 @@
 <pre><code class="python">&lt;script&gt;alert(/haha/)&lt;/script&gt;
 </code></pre>
 <p><img src="https://img-blog.csdnimg.cn/20201027201050216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>medium:引号被转义，可以考虑<a target="_blank" rel="noopener" href="http://ctf.ssleye.com/url.html">url转码</a></p>
-<p><img src="https://img-blog.csdnimg.cn/20201027201412575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>high:还可以在页面会显，但类似<script>alert( /haha/ )</script>不被执行</p>
+<p><img src="https://img-blog.csdnimg.cn/20201027201412575.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvbmdqaW5nZWdl,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"><br>high:还可以在页面会显，但类似<code>&lt;script&gt;alert( /haha/ )&lt;/script&gt;</code>不被执行</p>
 <p>**</p>
 <h2 id="HTML-Injection-Reflected-POST"><a href="#HTML-Injection-Reflected-POST" class="headerlink" title="HTML Injection - Reflected (POST)"></a>HTML Injection - Reflected (POST)</h2><p>**</p>
 <p>同上，区别是提交方式为post，可以用burp suite方便观察</p>
